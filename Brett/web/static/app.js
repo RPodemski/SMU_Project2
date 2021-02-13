@@ -22,49 +22,44 @@ var redIcon = new L.Icon({
     shadowSize: [41, 41]
 });
 
-var start_date = '2020-01-01';
-var end_date = '2020-12-31';
-
 var west_bound = -97.05; // Coords greater than this
 var east_bound = -96.58; // Coords less than this
 var north_bound = 32.90; // Coords less than this
 var south_bound = 32.58; // Coords greater than this
-
+// end global
 
 $(document).ready(function() {
     makeMap();
 
     // EVENT LISTENERS //
     $("#selector").change(function() {
-        var new_test = $("#selector").val();
-        console.log(new_test);
         makeMap();
     });
 
 });
 
-var date_filter_url = `https://www.dallasopendata.com/resource/vcg4-5wum.json?$where=inspection_date between '${start_date}' and '${end_date}'`
 
 function makeMap() {
 
-
     var timeframe = $("#selector").val();
+    var timeframe_text = $("#selector option:selected").text();
+    $("#maptitle").text(`Last 5,000 Health Inspections in the year ${timeframe_text}`);
 
-    var queryUrl = `https://www.dallasopendata.com/resource/vcg4-5wum.json?$where=inspection_date between '${timeframe}' and '${end_date}'`
+    var date_filter_url = `https://www.dallasopendata.com/resource/vcg4-5wum.json?$where=inspection_date between '${timeframe}'`
 
     // GET request
     $.ajax({
         type: "GET",
-        url: queryUrl,
+        url: date_filter_url,
         data: {
-            "$limit": 2000, // change the # of inspections viewed.
+            "$limit": 5000, // change the # of inspections viewed.
             "$$app_token": SODA_APP_TOKEN,
             // "program_identifier": "STARBUCKS",
             // "inspection_date": ''
             // "zip_code": '75238'
         },
         success: function(data) {
-            console.log(data);
+            // console.log(data);
 
             buildMap(data);
 
@@ -115,7 +110,7 @@ function buildMap(data) {
     data.filter(d => d.lat_long.latitude).forEach(function(inspection) {
         var lat = +inspection.lat_long.latitude;
         var lng = +inspection.lat_long.longitude;
-        var inspection_score = +inspection.inspection_score; // Converting Inspectoin Score to //#
+        var inspection_score = +inspection.inspection_score;
 
         if (inspection_score < 70) {
             var inspection_score = 40
@@ -140,7 +135,10 @@ function buildMap(data) {
             marker_list.push(marker);
             bads.push(marker);
             heatmap_list.push([lat, lng, inspection_score]) // Heatmap [Lat, Long, Weight]
-        } else if ((inspection.inspection_score < 90) & (lng > west_bound) & (lng < east_bound) & (lat < north_bound) & (lat > south_bound)) {
+        }
+
+        /////////////// INSPECTION SCORE < 90 ///////////////////
+        else if ((inspection.inspection_score < 90) & (lng > west_bound) & (lng < east_bound) & (lat < north_bound) & (lat > south_bound)) {
             var marker = L.marker([lat, lng], {
                 draggable: false,
                 icon: orangeIcon,
@@ -174,9 +172,6 @@ function buildMap(data) {
 
     ////////////////////// CLUSTER BOIS ////////////////////////
     cluster_markers = L.markerClusterGroup({
-
-
-
         iconCreateFunction: function(cluster) {
             var childCount = cluster.getChildCount();
             var c = ' marker-cluster-';
@@ -192,9 +187,6 @@ function buildMap(data) {
                 html: '<div><span>' + childCount + '</span></div>',
                 className: 'marker-cluster' + c,
                 iconSize: L.Point(30, 30),
-
-
-
             });
         },
         showCoverageOnHover: true,
@@ -215,11 +207,8 @@ function buildMap(data) {
         }));
     };
 
-
-
-
     myMap.addLayer(cluster_markers);
-    ///////////// UGLY ///////////////////////////////////
+
     var good_group = L.layerGroup(goods);
     var okay_group = L.layerGroup(okays);
     var bad_group = L.layerGroup(bads);
@@ -232,9 +221,6 @@ function buildMap(data) {
         gradient: { 0.4: '#00D8A6', 0.65: '#FFDA33', 1: '#FF2F63' },
     });
     heat_layer.addTo(myMap);
-
-
-    // marker_group.addTo(myMap);
 
     var baseMaps = {
         "Light Mode": light_mode,
@@ -257,9 +243,8 @@ function buildMap(data) {
 
     legend.onAdd = function() {
         var div = L.DomUtil.create("div", "info legend");
-
-
         // Add min & max
+
         var legendInfo = "<h5 style=text-align:center;margin-top:0>Inspection Scores</h5>" +
             "<div>" +
             "<div style=display:inline-block;margin-right:5px>< 70</div>" +

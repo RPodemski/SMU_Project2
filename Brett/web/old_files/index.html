@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Project 2 Group 2</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+    <!-- Icons -->
+    <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- <link rel="stylesheet" href="static/css/leaflet.extra-markers.min.css"> -->
+
+    <!-- Our CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <!-- Marker Cluster JS -->
+    <script type="text/javascript" src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+
+    <!-- Icons -->
+    <!-- <script src="static/js/leaflet.extra-markers.min.js"></script> -->
+    <!-- API key -->
+    <script type="text/javascript" src="static/config.js"></script>
+    <!-- JS Need to rename once complete-->
+    <script type="text/javascript" src="static/app2.js"></script>
+    <script type="text/javascript" src="static/leaflet-heat.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <select class="form-control" id="selector">
+        <option value="2020-01-01">Inspection Year</option>
+        <option value="2017-01-01">2017</option>
+        <option value="2018-01-01">2018</option>
+        <option value="2019-01-01">2019</option>
+        <option value="2020-01-01">2020</option>
+      </select>
+    </div>
+    <!-- The div that holds our map -->
+    <div class="container-fluid">
+        <div class="col-md-12" id="mapcontainer">
+        </div>
+    </div>
+    <div id="map-id"></div>
+</body>
+
+</html>
+
+<!-- https://github.com/pointhi/leaflet-color-markers/blob/master/js/leaflet-color-markers.js -->

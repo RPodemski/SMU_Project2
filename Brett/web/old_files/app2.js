@@ -22,8 +22,8 @@ var redIcon = new L.Icon({
     shadowSize: [41, 41]
 });
 
-var start_date = '2020-01-01';
-var end_date = '2020-12-31';
+var start_date = "2020-01-01";
+var end_date = "2020-12-31";
 
 var west_bound = -97.05; // Coords greater than this
 var east_bound = -96.58; // Coords less than this
@@ -43,7 +43,7 @@ $(document).ready(function() {
 
 });
 
-var date_filter_url = `https://www.dallasopendata.com/resource/vcg4-5wum.json?$where=inspection_date between '${start_date}' and '${end_date}'`
+var date_filter_url = `https://www.dallasopendata.com/resource/vcg4-5wum.json?$where=inspection_date > '${start_date}'`
 
 function makeMap() {
 
