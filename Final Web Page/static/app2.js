@@ -1,14 +1,14 @@
+var restaurantsOnInit = ["CHIPOTLE MEXICAN GRILL", "OLIVE GARDEN"];
+
+SODA_APP_TOKEN = "afgp8F50YbvDm9F5BPyQfdpuH";
+
+var initData = [];
+
 $(document).ready(function() {
     onInit();
 
-    $(window).resize(function() {
-        buildPlot();
-    });
 });
 
-var restaurantsOnInit = ["CHIPOTLE MEXICAN GRILL", "OLIVE GARDEN"]
-
-SODA_APP_TOKEN = "afgp8F50YbvDm9F5BPyQfdpuH"
 
 
 function onInit() {
@@ -28,10 +28,14 @@ function onInit() {
                 // "inspection_date": ''
                 // "zip_code": '75238'
             },
-            success: function(data, i) {
+            success: function(data) {
                 data = data.sort((a, b) => new Date(b.inspection_date) - new Date(a.inspection_date))
                     //console.log(data);
-                buildPlot(data, i);
+                initData.push(data);
+
+                if (initData.length == restaurantsOnInit.length) {
+                    buildPlot();
+                }
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 alert("Status: " + textStatus);
@@ -94,33 +98,36 @@ function newRestaurant() {
     });
 }
 
-function buildPlot(data, i) { // , newTrace
+function buildPlot() { // , newTrace
+    var lines = [];
 
+    for (i = 0; i < initData.length; i++) {
+        var data = initData[i];
 
+        colors = ['#EE6123', '#FA003F']
 
+        trace = {
+            x: data.map(x => x.inspection_date),
+            y: data.map(x => x.inspection_score),
+            mode: 'lines+markers',
+            name: restaurantsOnInit[i],
+            text: data.map(x => x.zip_code),
+            marker: {
+                opacity: 0.5,
+                size: 5
+            },
+            line: {
+                color: colors[i],
+                width: .5,
+            }
 
-    // colors = ['rgba(0, 145, 110, 1)', 'rgba(254, 239, 229, 1)', 'rgba(255, 207, 0, 1)', 'rgba(250, 3, 63, 1)']
-
-    trace = {
-        x: data.map(x => x.inspection_date),
-        y: data.map(x => x.inspection_score),
-        mode: 'lines+markers',
-        name: restaurantsOnInit[i], // NOT WORKING
-        text: data.map(x => x.zip_code),
-        marker: {
-            opacity: 0.5,
-            size: 5
-        },
-        line: {
-            width: .3,
-            //color: colors[i]
         }
 
+
+
+        lines.push(trace);
+
     }
-
-
-
-    lines = [trace]
 
     var layout = {
         title: 'Inspection Scores Over Time',
@@ -138,8 +145,6 @@ function buildPlot(data, i) { // , newTrace
             linewidth: 2,
             ticks: 'outside',
             tickcolor: 'rgb(204,204,204)',
-            // tickwidth: 2,
-            // ticklen: 5,
             tickfont: {
                 family: 'Arial',
                 size: 12,
@@ -157,29 +162,6 @@ function buildPlot(data, i) { // , newTrace
         }
     };
 
-    //console.log(lines)
     Plotly.plot('plot', lines, layout);
-    //Plotly.deleteTraces('plot', [-2, -1])
 
 }
-
-// var restaurantInput = "WHATABURGER"; // default
-// newRestaurant(restaurantInput);
-
-// function handleSubmit() {
-//     // Prevent the page from refreshing
-//     Plotly.d3.event.preventDefault();
-
-//     // Select the input value from the form
-//     var restaurantInput = Plotly.d3.select("#restaurantInput").node().value;
-//     restaurantInput = restaurantInput.toUpperCase()
-//     console.log(restaurantInput)
-
-//     // clear the input value
-//     Plotly.d3.select("#restaurantInput").node().value = "";
-//     console.log(restaurantInput)
-//         // Build the plot with the new stock
-//     newRestaurant(restaurantInput);
-// }
-
-// Plotly.d3.select("#submit").on("click", handleSubmit);

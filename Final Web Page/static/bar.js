@@ -13,7 +13,7 @@ function makeMap() {
         type: "GET",
         url: queryUrl,
         data: {
-            "$limit": 55000, // change the # of inspections viewed.
+            "$limit": 500, // change the # of inspections viewed.
             "$$app_token": SODA_APP_TOKEN,
         },
         success: function(data) {
@@ -40,7 +40,7 @@ function createMap() {
         type: "GET",
         url: queryUrl,
         data: {
-            "$limit": 1000, // change the # of inspections viewed.
+            "$limit": 500, // change the # of inspections viewed.
             "$$app_token": SODA_APP_TOKEN,
             "program_identifier": `${restaurantInput}`
         },
@@ -109,9 +109,12 @@ function buildBarZip(data) {
         title: "Average Inspection Score per Zip Code",
         xaxis: {
             type: "category",
-            tickangle: -60
+            tickangle: -60,
+
         },
-        yaxis: { title: "Inspection Scores" }
+        yaxis: {
+            title: "Inspection Scores"
+        }
     }
 
     Plotly.newPlot('bar', barPlot, layout);

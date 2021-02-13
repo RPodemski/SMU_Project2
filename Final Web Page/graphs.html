@@ -64,14 +64,34 @@
 
                             </div>
                         </div>
+
                         <div class="form-group">
                             <input type="text" class="form-control" id="restaurantInput" placeholder="Enter a restaurant">
+                            <button id="submit" type="submit" onclick="newRestaurant(), createMap();return false;" class="btn btn-success">Get Info</button>
+
                         </div>
-                        <button id="submit" type="submit" onclick="newRestaurant(), createMap();return false;" class="btn btn-default">Get Info</button>
                 </form>
                 <div id="plot"></div>
                 <hr>
                 <div class="row">
+                    <h6 style="margin-bottom:10px"> Regions of Dallas </h6>
+                    <div>
+                        <div style="background:#98ee00;height:10px;width:10px;display:inline-block"> </div>
+                        <div style="display:inline-block"> Less than 10 Miles</div>
+                    </div>
+                    <div>
+                        <div style="background:#d4ee00;height:10px;width:10px;display:inline-block"></div>
+                        <div style="display:inline-block">10 - 30 Miles</div>
+                    </div>
+                    <div>
+                        <div style="background:#eecc00;height:10px;width:10px;display:inline-block"></div>
+                        <div style="display:inline-block">30 - 50 Miles</div>
+                    </div>
+                    <div>
+                        <div style="background:#ee9c00;height:10px;width:10px;display:inline-block"></div>
+                        <div style="display:inline-block">50 - 70 Miles</div>
+                    </div>
+
                     <div class="col-md-12">
                         <!-- <h3>Figure 1</h3> -->
                         <div id="bar"></div>
