@@ -1,0 +1,29 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>D3Times</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.min.js"></script>
+    <script src="https://unpkg.com/d3-v6-tip@1.0.6/build/d3-v6-tip.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script type="text/javascript" src="app5.js"></script>
+    <script type="text/javascript" src="config.js"></script>
+</head>
+
+<body>
+    <form class="form-inline">
+        <div class="form-group">
+            <input type="text" class="form-control" id="restaurantInput" placeholder="Enter a restaurant">
+        </div>
+        <button id="submit" type="submit" onclick="newRestaurant();return false;" class="btn btn-default">Get Info</button>
+    </form>
+    <div id="plot"></div>
+
+</body>
+
+</html>
