@@ -6,8 +6,8 @@
     <title>Restuarant Violations </title>
 
     <!-- Icons -->
-    <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/minty/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
 
     <!-- Plotly -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -16,12 +16,17 @@
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <!-- Marker Cluster JS -->
-    <script type="text/javascript" src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    <script src="https://unpkg.com/d3-v6-tip@1.0.6/build/d3-v6-tip.js"></script>
+
     <!-- API key -->
     <script type="text/javascript" src="static/config2.js"></script>
     <!-- JS Need to rename once complete-->
     <script type="text/javascript" src="static/bar.js"></script>
+    <script type="text/javascript" src="static/app2.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 
 </head>
 
@@ -30,7 +35,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
-            </button>
+        </button>
         <div class="collapse navbar-collapse" id="navbarColor03">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
@@ -39,36 +44,45 @@
                 <li class="nav-item">
                     <a class="nav-link" href="graphs.html">Graphs</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="map.html">Map</a>
                 </li>
             </ul>
         </div>
     </nav>
-
     <div class="container-fluid">
         <div class="row" style="margin-top:5%">
             <div class="col-md-12" style="border: 5px solid black;">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h1>Graphs</h1>
-                            <hr>
-                            <h6>Select a restaurant:</h6>
+                <form class="form-inline">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1>Graphs</h1>
+                                <hr>
+                                <h6>Select a restaurant:</h6>
+                                <p>Please use correct punctuation inculding (ex: - , ')</p>
+
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <!-- <h3>Figure 1</h3> -->
-                            <div id="bar"></div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="restaurantInput" placeholder="Enter a restaurant">
                         </div>
+                        <button id="submit" type="submit" onclick="newRestaurant(), createMap();return false;" class="btn btn-default">Get Info</button>
+                </form>
+                <div id="plot"></div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- <h3>Figure 1</h3> -->
+                        <div id="bar"></div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <!-- <h3>Figure 2</h3> -->
-                            <div id="bar2"></div>
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- <h3>Figure 2</h3> -->
+                        <div id="bar2"></div>
                     </div>
+                </div>
                 </div>
             </div>
 </body>

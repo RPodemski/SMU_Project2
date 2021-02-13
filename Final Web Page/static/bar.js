@@ -29,8 +29,35 @@ function makeMap() {
     });
 }
 
-function buildBarZip(data) {
+function createMap() {
 
+    var restaurantInput = $('#restaurantInput').val().toUpperCase();
+    console.log(restaurantInput);
+
+    var queryUrl = "https://www.dallasopendata.com/resource/vcg4-5wum.json?"
+
+    $.ajax({
+        type: "GET",
+        url: queryUrl,
+        data: {
+            "$limit": 1000, // change the # of inspections viewed.
+            "$$app_token": SODA_APP_TOKEN,
+            "program_identifier": `${restaurantInput}`
+        },
+        success: function(data) {
+            // console.log(data);
+            buildBarZip(data);
+            buildBarReason(data);
+
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            alert("Status: " + textStatus);
+            alert("Error: " + errorThrown);
+        }
+    });
+}
+
+function buildBarZip(data) {
     var zipCodes = data.map(x => x.zip_code);
     zipCodes = [...new Set(zipCodes)];
 
@@ -72,6 +99,7 @@ function buildBarZip(data) {
         x: averages.map(x => x.zipcode),
         y: averages.map(x => x.avg_score),
         type: 'bar',
+        name: 'North East Dallas',
         marker: {
             color: colors
         }
