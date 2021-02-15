@@ -13,6 +13,7 @@ d3.csv('new_rest.csv').then(function(data) {
         x: inspection_score,
         y: violation_total,
         mode: "markers",
+        marker: { color: 'red' },
         type: "scatter"
     };
     var layout = {
