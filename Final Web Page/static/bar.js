@@ -82,18 +82,30 @@ function buildBarZip(data) {
 
     var colors = [];
     averages.forEach(function(i) {
-        if (northED.includes(i.zipcode) == true) {
-            colors.push("#00916E");
-        } else if (southED.includes(i.zipcode) == true) {
-            colors.push("#FFCF00");
-        } else if (northWD.includes(i.zipcode) == true) {
-            colors.push("#EE6123");
-        } else if (southWD.includes(i.zipcode) == true) {
-            colors.push("#FA003F");
+        if (i.avg_score >= 90) {
+            colors.push("#00916E"); //green
+        } else if (i.avg_score >= 80) {
+            colors.push("#FFCF00"); //yellow
+        } else if (i.avg_score >= 70) {
+            colors.push("#EE6123"); //orange
+        } else if (i.avg_score <= 69) {
+            colors.push("#FA003F"); //red
         } else {
-            colors.push("black");
+            colors.push("black"); //something went wrong
         }
     });
+
+    // if (northED.includes(i.zipcode) == true) {
+    //     colors.push("#00916E");
+    // } else if (southED.includes(i.zipcode) == true) {
+    //     colors.push("#FFCF00");
+    // } else if (northWD.includes(i.zipcode) == true) {
+    //     colors.push("#EE6123");
+    // } else if (southWD.includes(i.zipcode) == true) {
+    //     colors.push("#FA003F");
+    // } else {
+    //     colors.push("black");
+    // }
 
     var barPlot = [{
         x: averages.map(x => x.zipcode),
