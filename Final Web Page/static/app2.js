@@ -30,7 +30,6 @@ function onInit() {
             },
             success: function(data) {
                 data = data.sort((a, b) => new Date(b.inspection_date) - new Date(a.inspection_date))
-                    //console.log(data);
                 initData.push(data);
 
                 if (initData.length == restaurantsOnInit.length) {
@@ -49,7 +48,6 @@ function onInit() {
 function newRestaurant() {
 
     var restaurantInput = $('#restaurantInput').val().toUpperCase();
-    console.log(restaurantInput);
 
     var queryUrl = "https://www.dallasopendata.com/resource/vcg4-5wum.json?";
     // Perform a GET request to the query URL
@@ -65,13 +63,16 @@ function newRestaurant() {
         },
         success: function(data2) {
 
-            //var myPlot = document.getElementById('plot'),
+            if (data2 === 'undefined' || data2.length == 0) {
+                alert("Restaurant can not be found.");
+            }
+
             if (typeof newTrace !== 'undefined') {
                 Plotly.deleteTraces('plot', -1)
             }
 
             data2 = data2.sort((a, b) => new Date(b.inspection_date) - new Date(a.inspection_date))
-                //console.log(data2)
+
             newTrace = {
                 x: data2.map(x => x.inspection_date),
                 y: data2.map(x => x.inspection_score),
@@ -86,10 +87,8 @@ function newRestaurant() {
                     color: 'rgba(0, 145, 110, 2)'
                 }
             }
-            console.log(newTrace);
-            Plotly.addTraces('plot', newTrace)
 
-            //buildPlot(newTrace);
+            Plotly.addTraces('plot', newTrace)
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
             alert("Status: " + textStatus);
@@ -123,10 +122,7 @@ function buildPlot() { // , newTrace
 
         }
 
-
-
         lines.push(trace);
-
     }
 
     var layout = {

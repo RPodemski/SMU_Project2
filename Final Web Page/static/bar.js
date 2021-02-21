@@ -32,7 +32,6 @@ function makeMap() {
 function createMap() {
 
     var restaurantInput = $('#restaurantInput').val().toUpperCase();
-    console.log(restaurantInput);
 
     var queryUrl = "https://www.dallasopendata.com/resource/vcg4-5wum.json?"
 
