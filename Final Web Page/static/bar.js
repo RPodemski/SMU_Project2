@@ -1,10 +1,6 @@
 $(document).ready(function() {
     makeGraph();
 
-    $("#selector").change(function() {
-        makeGraph();
-    });
-
     $(window).resize(function() {
         makeGraph();
     });
