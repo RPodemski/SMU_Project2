@@ -130,11 +130,11 @@ function buildPlot() { // , newTrace
         hovermode: "closest",
         xaxis: {
             title: 'Date',
-            titlefont: {
-                family: 'Arial',
-                size: 22,
-                color: 'rgb(82, 82, 82)'
-            },
+            // titlefont: {
+            //     family: 'Arial',
+            //     size: 22,
+            //     color: 'rgb(82, 82, 82)'
+            // },
             showline: true,
             showgrid: false,
             linecolor: 'rgb(204,204,204)',
@@ -150,11 +150,11 @@ function buildPlot() { // , newTrace
         },
         yaxis: {
             title: 'Inspection Score',
-            titlefont: {
-                family: 'Arial',
-                size: 22,
-                color: 'rgb(82, 82, 82)'
-            },
+            // titlefont: {
+            //     family: 'Arial',
+            //     size: 22,
+            //     color: 'rgb(82, 82, 82)'
+            // },
         }
     };
 

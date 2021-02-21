@@ -23,6 +23,7 @@
     <!-- JS Need to rename once complete-->
     <script type="text/javascript" src="static/bar.js"></script>
     <script type="text/javascript" src="static/app2.js"></script>
+    <script type="text/javascript" src="static/plots.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -61,52 +62,50 @@
                                 <hr>
                                 <h6>Select a restaurant:</h6>
                                 <p>Please use correct punctuation inculding (ex: - , ')</p>
-
                             </div>
                         </div>
-
                         <div class="form-group">
                             <input type="text" class="form-control" id="restaurantInput" placeholder="Enter a restaurant">
-                            <button id="submit" type="submit" onclick="newRestaurant(), createMap();return false;" class="btn btn-success">Get Info</button>
-
+                            <button id="submit" type="submit" onclick="newRestaurant(), createGraph();return false;" class="btn btn-success">Get Info</button>
                         </div>
                 </form>
                 <div id="plot"></div>
                 <hr>
-                <div>
+                <div class="row">
                     <div class="col-md-12">
-                        <!-- <h3>Figure 1</h3> -->
                         <div id="bar2"></div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <!-- <h3>Figure 2</h3> -->
                         <div id="bar"></div>
                     </div>
                 </div>
                 <div class="row">
-                    <h6 style="margin:10px"> Inspection Scores: </h6>
-
+                    <p style="margin:8px">Inspection Scores:</p>
                     <div>
-                        <div style="background:#00916E;height:10px;width:10px;display:inline-block"> </div>
-                        <div style="display:inline-block;margin:10px"> Greater Than 90 </div>
+                        <div style="background:#00916E;height:8px;width:8px;display:inline-block"> </div>
+                        <div style="display:inline-block;margin:8px">Greater Than 90</div>
                     </div>
                     <div>
-                        <div style="background:#FFCF00;height:10px;width:10px;display:inline-block"></div>
-                        <div style="display:inline-block;margin:10px"> Greater Than 80</div>
+                        <div style="background:#FFCF00;height:8px;width:8px;display:inline-block"></div>
+                        <div style="display:inline-block;margin:8px">Greater Than 80</div>
                     </div>
                     <div>
-                        <div style="background:#EE6123;height:10px;width:10px;display:inline-block"></div>
-                        <div style="display:inline-block;margin:10px"> Greater Than 70</div>
+                        <div style="background:#EE6123;height:8px;width:8px;display:inline-block"></div>
+                        <div style="display:inline-block;margin:8px">Greater Than 70</div>
                     </div>
                     <div>
-                        <div style="background:#FA003F;height:10px;width:10px;display:inline-block"></div>
-                        <div style="display:inline-block;margin:10px"> Less Than 70 </div>
+                        <div style="background:#FA003F;height:8px;width:8px;display:inline-block"></div>
+                        <div style="display:inline-block;margin:8px">Less Than 70</div>
                     </div>
                 </div>
                 </div>
+                <hr>
+                <div id="plot2"></div>
             </div>
+        </div>
+    </div>
 </body>
 
 </html>

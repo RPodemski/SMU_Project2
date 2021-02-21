@@ -59,10 +59,7 @@ function makeMap() {
             // "zip_code": '75238'
         },
         success: function(data) {
-            // console.log(data);
-
             buildMap(data);
-
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
             alert("Status: " + textStatus);
