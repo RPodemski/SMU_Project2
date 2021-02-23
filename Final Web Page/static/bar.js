@@ -55,9 +55,11 @@ function restuarantFilter() {
 }
 
 function buildBarZip(data) {
+
     var zipCodes = data.map(x => x.zip_code);
     zipCodes = [...new Set(zipCodes)];
 
+    //pull zipcodes and avg inspection scores into array
     var averages = [];
     zipCodes.forEach(function(zip) {
         var filterData = data.filter(x => x.zip_code == zip);
@@ -66,8 +68,8 @@ function buildBarZip(data) {
         averages.push({ "zipcode": zip, "avg_score": avg });
     });
 
-
-    averages = averages.sort(function(a, b) {
+    //sort avg inspection scores lowest to highest
+    var averages = averages.sort(function(a, b) {
         return a.avg_score - b.avg_score;
     });
 
@@ -104,7 +106,7 @@ function buildBarZip(data) {
 
         },
         yaxis: {
-            title: "Inspection Scores"
+            title: "Average Inspection Scores"
         }
     }
 
@@ -158,7 +160,7 @@ function buildBarReason(data) {
         xaxis: {
             type: "category"
         },
-        yaxis: { title: "Inspection Scores" }
+        yaxis: { title: "Average Inspection Scores" }
     }
 
     Plotly.newPlot('bar2', barPlot, layout);
